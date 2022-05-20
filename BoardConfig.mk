@@ -34,10 +34,10 @@ TW_NO_REBOOT_BOOTLOADER := true
 TARGET_OTA_ASSERT_DEVICE := kylepro,kyleproxx,kyleprouh,kyleprodu,kyleprodv,kyleprojk,kyleproub,kyleprods,kyleprodsxx,kyleprodsub,GT-S7580
 
 # Filesystem
-#fake values for recovery partition to workaround TWRP 3.6.1-9
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10191424
-BOARD_FLASH_BLOCK_SIZE             := 262144
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10191424 # TODO fix partition size
+BOARD_FLASH_BLOCK_SIZE             := 262144   # TODO fix partition size
 TARGET_USERIMAGES_USE_EXT4         := true
+TARGET_USERIMAGES_USE_F2FS         := true
 BOARD_USES_MMCUTILS                := true
 BOARD_SUPPRESS_EMMC_WIPE           := true
 BOARD_SUPPRESS_SECURE_ERASE        := true
@@ -46,36 +46,19 @@ RECOVERY_SDCARD_ON_DATA            := true
 BOARD_HAS_NO_MISC_PARTITION        := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyFIQ0 no_console_suspend
-BOARD_PAGE_SIZE := 4096
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-TARGET_PREBUILT_KERNEL := device/samsung/kylepro/prebuilt/zImage
-# Recovery
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
-TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
-BOARD_SUPPRESS_EMMC_WIPE := true
+TARGET_PREBUILT_KERNEL   := device/samsung/kylepro/prebuilt/zImage
+BOARD_KERNEL_CMDLINE     := console=ttyFIQ0 no_console_suspend
+BOARD_KERNEL_BASE        := 0x00000000
+BOARD_KERNEL_OFFSET      := 0x00008000
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+BOARD_KERNEL_PAGESIZE    := 4096
+BOARD_MKBOOTIMG_ARGS     := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 
 # Display & Graphics
-TW_THEME := portrait_mdpi
+TW_THEME                         := portrait_mdpi
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
 
 # TWRP
-DEVICE_RESOLUTION                           := 480x800
-TARGET_USE_CUSTOM_LUN_FILE_PATH             := /sys/class/android_usb/android0/f_mass_storage/lun/file
-TARGET_USERIMAGES_USE_EXT4                  := true
-TARGET_USERIMAGES_USE_F2FS                  := true
-TARGET_RECOVERY_PIXEL_FORMAT                := BGRA_8888
-TW_MAX_BRIGHTNESS                           := 255
-TW_CUSTOM_BATTERY_PATH                      := /sys/class/power_supply/battery
-TW_BRIGHTNESS_PATH                          := /sys/class/backlight/panel/brightness
-RECOVERY_SDCARD_ON_DATA                     := true
-TW_NO_REBOOT_BOOTLOADER                     := true
-RECOVERY_GRAPHICS_USE_LINELENGTH            := true
-TW_INTERNAL_STORAGE_PATH                    := /data/media
-TW_INTERNAL_STORAGE_MOUNT_POINT             := sdcard
-TW_EXTERNAL_STORAGE_PATH                    := /external_sd
-TW_EXTERNAL_STORAGE_MOUNT_POINT             := external_sd
-TW_DEFAULT_EXTERNAL_STORAGE                 := true
-TW_EXCLUDE_SUPERSU                          := true
-TW_NO_CPU_TEMP                              := true
-BOARD_HAS_NO_REAL_SDCARD                    := true
-HAVE_SELINUX                                := true
+BOARD_RECOVERY_SWIPE    := true
+TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone1/temp"
+TW_EXCLUDE_SUPERSU      := true
