@@ -64,7 +64,6 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH             := /sys/class/android_usb/android0/f
 TARGET_USERIMAGES_USE_EXT4                  := true
 TARGET_USERIMAGES_USE_F2FS                  := true
 TARGET_RECOVERY_PIXEL_FORMAT                := BGRA_8888
-BOARD_HAS_NO_MISC_PARTITION                 := true
 TW_MAX_BRIGHTNESS                           := 255
 TW_CUSTOM_BATTERY_PATH                      := /sys/class/power_supply/battery
 TW_BRIGHTNESS_PATH                          := /sys/class/backlight/panel/brightness
