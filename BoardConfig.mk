@@ -31,7 +31,7 @@ TW_HAS_DOWNLOAD_MODE    := true
 TW_NO_REBOOT_BOOTLOADER := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := kylepro,kyleproxx,kyleprouh,kyleprodu,kyleprodv,kyleprojk,kyleproub,kyleprods,kyleprodsxx,kyleprodsub,GT-S7580
+TARGET_OTA_ASSERT_DEVICE := kylepro,kyleproxx,kyleprouh,kyleprodu,kyleprodv,kyleprojk,kyleproub,kyleprods,kyleprodsxx,kyleprodsub,GT-S7580,hawaii
 
 # Filesystem
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10191424 # TODO fix partition size
@@ -60,5 +60,5 @@ RECOVERY_GRAPHICS_USE_LINELENGTH := true
 
 # TWRP
 BOARD_RECOVERY_SWIPE    := true
-TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone1/temp"
+TW_NO_CPU_TEMP := true
 TW_EXCLUDE_SUPERSU      := true
