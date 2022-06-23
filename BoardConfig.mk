@@ -34,7 +34,7 @@ TW_NO_REBOOT_BOOTLOADER := true
 TARGET_OTA_ASSERT_DEVICE := kylepro,kyleproxx,kyleprouh,kyleprodu,kyleprodv,kyleprojk,kyleproub,kyleprods,kyleprodsxx,kyleprodsub,GT-S7580,hawaii
 
 # Filesystem
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10191424 # TODO fix partition size
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 11191424 # TODO fix partition size
 BOARD_FLASH_BLOCK_SIZE             := 262144   # TODO fix partition size
 TARGET_USERIMAGES_USE_EXT4         := true
 TARGET_USERIMAGES_USE_F2FS         := true
