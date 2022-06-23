@@ -1,0 +1,49 @@
+name: OFRP CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: OFRP Build CI
+    runs-on: ubuntu-18.04
+
+    env:
+      OEM: samsung
+      DEVICE: kylepro
+      BRANCH: twrp-6.0
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Installing build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install zip gcc-multilib g++-multilib \
+            libc6-dev-i386 lib32ncurses5-dev imagemagick axel \
+            libgl1-mesa-dev libxml2-utils xsltproc schedtool lib32z1-dev
+      - name: Syncing OFRP sources
+        run: |
+          mkdir ~/OFRP
+          cd ~/OFRP
+          mkdir ~/.bin
+          curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+          python3 ~/.bin/repo init --depth=1 -u https://github.com/OrangeFoxRecovery/fox-6.0_manifest.git -b fox_6.0
+          python3 ~/.bin/repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
+          git clone --depth=1 --branch twrp-5.1 --single-branch https://github.com/unlegacy-devices/twrp_device_samsung_kylepro.git device/samsung/kylepro
+      - name: Building OFRP
+        run: |
+          cd ~/OFRP
+          source build/envsetup.sh
+          export ALLOW_MISSING_DEPENDENCIES=true
+          export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
+          export FOX_DRASTIC_SIZE_REDUCTION=1
+          export LC_ALL=C
+          export OF_LEGACY_SHAR512=1
+          lunch omni_kylepro-eng
+          make -j$(nproc --all) recoveryimage
+      - name: Uploading OFRP builds
+        uses: actions/upload-artifact@v2
+        with:
+          name: ofrp
+          path: /home/runner/OFRP/out/target/product/kylepro/recovery.*
