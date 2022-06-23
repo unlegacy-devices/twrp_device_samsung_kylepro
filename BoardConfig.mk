@@ -55,7 +55,7 @@ BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_MKBOOTIMG_ARGS     := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 
 # Display & Graphics
-TW_THEME                         := portrait_mdpi
+TW_THEME                         := portrait_hdpi
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 
 # TWRP
